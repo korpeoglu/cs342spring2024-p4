@@ -15,13 +15,12 @@
 #define FALSE 0
 #define TRUE 1
 
-
-#define SECTORSIZE 512   //bytes
-#define CLUSTERSIZE 1024  //bytes
+#define SECTORSIZE 512   // bytes
+#define CLUSTERSIZE  1024  // bytes
 
 
 int readsector (int fd, unsigned char *buf, unsigned int snum);
-int writesector (int fd, unsigned char *buf, unsigned int  snum);
+int writesector (int fd, unsigned char *buf, unsigned int snum);
 
 
 
@@ -50,7 +49,7 @@ main(int argc, char *argv[])
 }
   
 int 
-readsector (int fd, unsigned char *buf, uint snum)
+readsector (int fd, unsigned char *buf,unsigned int snum)
 {
 	off_t offset;
 	int n;
@@ -58,23 +57,23 @@ readsector (int fd, unsigned char *buf, uint snum)
 	lseek (fd, offset, SEEK_SET);
 	n  = read (fd, buf, SECTORSIZE);
 	if (n == SECTORSIZE)
-		return (0);
+	     return (0);
 	else
-        return (-1);
+             return (-1);
 }
 
 
 int 
-writesector (int fd, unsigned char *buf, uint snum)
+writesector (int fd, unsigned char *buf, unsigned int snum)
 {
 	off_t offset;
 	int n;
 	offset = snum * SECTORSIZE;
 	lseek (fd, offset, SEEK_SET);
 	n  = write (fd, buf, SECTORSIZE);
-    fsync (fd);
-    if (n == SECTORSIZE)
-		return (0);
+        fsync (fd);
+        if (n == SECTORSIZE)
+	     return (0);
 	else
-        return (-1);
+             return (-1);
 }
